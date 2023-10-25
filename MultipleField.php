@@ -1,9 +1,10 @@
 <?php
-class MultipleField extends Field{
+class MultipleField extends Field
+{
 
     protected $options = [];
-    
-    public function __construct($name, $type, $text, $default='', $options = [])
+
+    public function __construct($name, $type, $text, $default = '', $options = [])
     {
         parent::__construct($name, $type, $text, $default);
         $this->options = $options;
@@ -13,11 +14,13 @@ class MultipleField extends Field{
         $this->options[$text] = $value;
     }
 
-    public function render() {
+    public function render()
+    {
         if ($this->type == "select") $this->renderSelect();
         else $this->renderRadio();
     }
-    private function renderSelect(){
+    private function renderSelect()
+    {
         echo "
         <p> <label for=\"id_$this->name\">$this->text: </label> </p>\n
         <select id=\"id_$this->name\" name =\"$this->name\">";
@@ -28,7 +31,8 @@ class MultipleField extends Field{
         }
         echo "</select>";
     }
-    private function renderRadio(){
+    private function renderRadio()
+    {
         echo "<p>$this->text: </p>";
         foreach ($this->options as $text => $value) {
             $id = str_replace(" ", "-", $text);
@@ -36,7 +40,5 @@ class MultipleField extends Field{
             <label for=\"$id\">$text</label>
             </p>";
         }
-
-
     }
 }
